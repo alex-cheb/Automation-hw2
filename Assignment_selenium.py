@@ -3,6 +3,8 @@
 # have Geckodriver of Chrome driver predifined in path
 
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 page = "https://anotepad.com"
 note = {"title":"My First Note", "content": "Lorem ipsum \n dolor sit amet"}
 note_created = "You have saved your note as a Guest User. You can come back at anytime to continue editing"
@@ -32,8 +34,6 @@ def create_note(data):
 
 def delete_note():
     #driver.get(link)
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
     driver.find_element_by_xpath("//a[@class = 'delete']").click()
     wait = WebDriverWait(driver, 10)
     elem = wait.until(EC.alert_is_present())
@@ -41,6 +41,6 @@ def delete_note():
     driver.get(page)
     check_delete(note_deleted)
     print("Passed")
-    
+
 create_note(note)
 delete_note()
